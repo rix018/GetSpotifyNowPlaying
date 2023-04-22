@@ -1,0 +1,11 @@
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\bin\Debug\GetSpotifyNowPlaying.exe
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\bin\Debug\GetSpotifyNowPlaying.pdb
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\bin\Debug\GetSpotifyNowPlaying.xml
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.vbprojAssemblyReference.cache
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.frmMain.resources
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.Resources.resources
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.vbproj.GenerateResource.cache
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.vbproj.CoreCompileInputs.cache
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.exe
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.xml
+D:\~Sandbox\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.pdb
