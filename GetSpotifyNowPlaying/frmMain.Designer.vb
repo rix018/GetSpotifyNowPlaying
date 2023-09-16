@@ -31,6 +31,8 @@ Partial Class frmMain
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.btnTimer = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,18 +85,38 @@ Partial Class frmMain
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "Simple Spotify Snip"
         '
+        'btnTimer
+        '
+        Me.btnTimer.Location = New System.Drawing.Point(12, 75)
+        Me.btnTimer.Name = "btnTimer"
+        Me.btnTimer.Size = New System.Drawing.Size(75, 23)
+        Me.btnTimer.TabIndex = 2
+        Me.btnTimer.Text = "Timer Start"
+        Me.btnTimer.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(93, 81)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(49, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "00:00:00"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 73)
+        Me.ClientSize = New System.Drawing.Size(410, 113)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.btnTimer)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "Simple Spotify Snip"
+        Me.Text = "Simple Spotify Snip feat. Stream Tool"
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -108,4 +130,6 @@ Partial Class frmMain
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents btnTimer As Button
+    Friend WithEvents Label3 As Label
 End Class

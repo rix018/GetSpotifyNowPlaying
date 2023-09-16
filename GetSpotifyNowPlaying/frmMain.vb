@@ -5,11 +5,18 @@ Imports System.Threading
 Public Class frmMain
 
     Private thisThread As Timer
+    Private thisTimerThread As Timer
+    Private iSeconds As Integer
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         Label.CheckForIllegalCrossThreadCalls = False
 
         If Not File.Exists(Application.StartupPath & "\NowPlaying.txt") Then
             File.Create(Application.StartupPath & "\NowPlaying.txt").Close()
+            Thread.Sleep(2000)
+        End If
+
+        If Not File.Exists(Application.StartupPath & "\Timer.txt") Then
+            File.Create(Application.StartupPath & "\Timer.txt").Close()
             Thread.Sleep(2000)
         End If
 
@@ -40,6 +47,30 @@ Public Class frmMain
         Next
     End Sub
 
+    Public Sub thisStartTimer()
+        Try
+            thisTimerThread = New Timer(AddressOf UpdateTimerLabel, Nothing, 1000, 1000)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub UpdateTimerLabel(ByVal state As Object)
+
+        Dim sSeconds As String
+        Dim tSpan As TimeSpan
+
+        tSpan = TimeSpan.FromSeconds(iSeconds)
+
+        sSeconds = tSpan.Hours.ToString.PadLeft(2, "0") & ":" & tSpan.Minutes.ToString.PadLeft(2, "0") & ":" & tSpan.Seconds.ToString.PadLeft(2, "0")
+
+        Label3.Text = sSeconds
+
+        UpdateText(Application.StartupPath & "\Timer.txt", sSeconds)
+
+        iSeconds += 1
+    End Sub
+
     Private Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String)
         Try
             Dim lines() As String = System.IO.File.ReadAllLines(sTxtPath)
@@ -61,6 +92,10 @@ Public Class frmMain
 
     Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         thisThread.Dispose()
+
+        If btnTimer.Text = "Stop Timer" Then
+            thisTimerThread.Dispose()
+        End If
     End Sub
 
     Private Sub ContextMenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ContextMenuStrip1.ItemClicked
@@ -86,10 +121,6 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub frmMain_MinimumSizeChanged(sender As Object, e As EventArgs) Handles Me.MinimumSizeChanged
-
-    End Sub
-
     Private Sub frmMain_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If Me.WindowState = FormWindowState.Minimized Then
             NotifyIcon1.Visible = True
@@ -99,4 +130,23 @@ Public Class frmMain
             Me.ShowInTaskbar = True
         End If
     End Sub
+
+    Private Sub btnTimer_Click(sender As Object, e As EventArgs) Handles btnTimer.Click
+
+        If btnTimer.Text = "Timer Start" Then
+            iSeconds = 0
+            thisStartTimer()
+            btnTimer.Text = "Stop Timer"
+        Else
+            btnTimer.Text = "Timer Start"
+
+            iSeconds = 0
+
+            Label3.Text = "00:00:00"
+
+            thisTimerThread.Dispose()
+        End If
+
+    End Sub
+
 End Class
