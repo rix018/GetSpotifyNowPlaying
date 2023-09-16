@@ -140,11 +140,14 @@ Public Class frmMain
         Else
             btnTimer.Text = "Timer Start"
 
+            thisTimerThread.Dispose()
+
             iSeconds = 0
 
             Label3.Text = "00:00:00"
 
-            thisTimerThread.Dispose()
+            UpdateText(Application.StartupPath & "\Timer.txt", "00:00:00")
+
         End If
 
     End Sub
