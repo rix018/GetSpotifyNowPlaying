@@ -33,6 +33,9 @@ Partial Class frmMain
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.btnTimer = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtGetPauseMessage = New System.Windows.Forms.TextBox()
+        Me.btnPauseMsgUpdate = New System.Windows.Forms.Button()
+        Me.btnPauseMsgRefresh = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -103,11 +106,40 @@ Partial Class frmMain
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "00:00:00"
         '
+        'txtGetPauseMessage
+        '
+        Me.txtGetPauseMessage.Location = New System.Drawing.Point(15, 103)
+        Me.txtGetPauseMessage.Multiline = True
+        Me.txtGetPauseMessage.Name = "txtGetPauseMessage"
+        Me.txtGetPauseMessage.Size = New System.Drawing.Size(383, 118)
+        Me.txtGetPauseMessage.TabIndex = 4
+        '
+        'btnPauseMsgUpdate
+        '
+        Me.btnPauseMsgUpdate.Location = New System.Drawing.Point(15, 227)
+        Me.btnPauseMsgUpdate.Name = "btnPauseMsgUpdate"
+        Me.btnPauseMsgUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnPauseMsgUpdate.TabIndex = 5
+        Me.btnPauseMsgUpdate.Text = "Update"
+        Me.btnPauseMsgUpdate.UseVisualStyleBackColor = True
+        '
+        'btnPauseMsgRefresh
+        '
+        Me.btnPauseMsgRefresh.Location = New System.Drawing.Point(93, 227)
+        Me.btnPauseMsgRefresh.Name = "btnPauseMsgRefresh"
+        Me.btnPauseMsgRefresh.Size = New System.Drawing.Size(75, 23)
+        Me.btnPauseMsgRefresh.TabIndex = 6
+        Me.btnPauseMsgRefresh.Text = "Refresh"
+        Me.btnPauseMsgRefresh.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 113)
+        Me.ClientSize = New System.Drawing.Size(410, 261)
+        Me.Controls.Add(Me.btnPauseMsgRefresh)
+        Me.Controls.Add(Me.btnPauseMsgUpdate)
+        Me.Controls.Add(Me.txtGetPauseMessage)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnTimer)
         Me.Controls.Add(Me.Label2)
@@ -132,4 +164,7 @@ Partial Class frmMain
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents btnTimer As Button
     Friend WithEvents Label3 As Label
+    Friend WithEvents txtGetPauseMessage As TextBox
+    Friend WithEvents btnPauseMsgUpdate As Button
+    Friend WithEvents btnPauseMsgRefresh As Button
 End Class

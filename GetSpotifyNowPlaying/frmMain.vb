@@ -10,19 +10,26 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         Label.CheckForIllegalCrossThreadCalls = False
 
-        If Not File.Exists(Application.StartupPath & "\NowPlaying.txt") Then
-            File.Create(Application.StartupPath & "\NowPlaying.txt").Close()
-            Thread.Sleep(2000)
-        End If
-
-        If Not File.Exists(Application.StartupPath & "\Timer.txt") Then
-            File.Create(Application.StartupPath & "\Timer.txt").Close()
-            Thread.Sleep(2000)
-        End If
+        IniThisFiles(Application.StartupPath & "\NowPlaying.txt")
+        IniThisFiles(Application.StartupPath & "\Timer.txt")
+        IniThisFiles(Application.StartupPath & "\PauseTXTMsg.txt")
 
         Label2.Text = ""
 
+        txtGetPauseMessage.Text = GetText(Application.StartupPath & "\PauseTXTMsg.txt")
+
         thisStartThread()
+    End Sub
+
+    Private Sub IniThisFiles(ByVal sFullPath As String)
+        Try
+            If Not File.Exists(sFullPath) Then
+                File.Create(sFullPath).Close()
+                Thread.Sleep(2000)
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Sub thisStartThread()
@@ -90,6 +97,19 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Function GetText(ByVal sTxtPath As String) As String
+        Dim sReturn As String = ""
+
+        Try
+            sReturn = System.IO.File.ReadAllText(sTxtPath)
+
+        Catch ex As Exception
+
+        End Try
+
+        Return sReturn
+    End Function
+
     Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         thisThread.Dispose()
 
@@ -152,4 +172,13 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub btnPauseMsgUpdate_Click(sender As Object, e As EventArgs) Handles btnPauseMsgUpdate.Click
+        UpdateText(Application.StartupPath & "\PauseTXTMsg.txt", txtGetPauseMessage.Text)
+
+        MsgBox("Message Updated!", vbOKOnly)
+    End Sub
+
+    Private Sub btnPauseMsgRefresh_Click(sender As Object, e As EventArgs) Handles btnPauseMsgRefresh.Click
+        txtGetPauseMessage.Text = GetText(Application.StartupPath & "\PauseTXTMsg.txt")
+    End Sub
 End Class
