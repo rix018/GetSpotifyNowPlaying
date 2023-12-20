@@ -20,3 +20,4 @@ D:\~Rix\Proj\Repository\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetS
 D:\~Rix\Proj\Repository\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.exe
 D:\~Rix\Proj\Repository\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.xml
 D:\~Rix\Proj\Repository\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.pdb
+D:\~Rix\Proj\Repository\GetSpotifyNowPlaying\GetSpotifyNowPlaying\obj\Debug\GetSpotifyNowPlaying.frmChecklist.resources

@@ -4,6 +4,7 @@ Imports System.Threading
 
 Public Class frmMain
 
+    Public myTasks As New List(Of myTask)
     Private thisThread As Timer
     Private thisTimerThread As Timer
     Private iSeconds As Integer
@@ -13,10 +14,12 @@ Public Class frmMain
         IniThisFiles(Application.StartupPath & "\NowPlaying.txt")
         IniThisFiles(Application.StartupPath & "\Timer.txt")
         IniThisFiles(Application.StartupPath & "\PauseTXTMsg.txt")
+        IniThisFiles(Application.StartupPath & "\Checklist.txt")
 
         Label2.Text = ""
 
         txtGetPauseMessage.Text = GetText(Application.StartupPath & "\PauseTXTMsg.txt")
+        txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
 
         thisStartThread()
     End Sub
@@ -48,7 +51,7 @@ Public Class frmMain
                 Dim thisWindowTitle As String = thisprocess.MainWindowTitle
                 If thisWindowTitle <> "" AndAlso thisWindowTitle <> "Spotify" AndAlso thisWindowTitle <> "Spotify Premium" Then
                     Label2.Text = thisprocess.MainWindowTitle
-                    UpdateText(Application.StartupPath & "\NowPlaying.txt", thisWindowTitle)
+                    UpdateText(Application.StartupPath & "\NowPlaying.txt", thisWindowTitle, True)
                 End If
             End If
         Next
@@ -73,18 +76,29 @@ Public Class frmMain
 
         Label3.Text = sSeconds
 
-        UpdateText(Application.StartupPath & "\Timer.txt", sSeconds)
+        UpdateText(Application.StartupPath & "\Timer.txt", sSeconds, True)
 
         iSeconds += 1
     End Sub
 
-    Private Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String)
+    Private Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String, ByVal bOneLine As Boolean)
         Try
+            Application.DoEvents()
+
+            File.WriteAllText(sTxtPath, "")
+
             Dim lines() As String = System.IO.File.ReadAllLines(sTxtPath)
 
             If lines.Count <> 0 Then
-                lines(0) = sNowPlaying
-                File.WriteAllLines(sTxtPath, lines)
+                If bOneLine Then
+                    lines(0) = sNowPlaying
+                    File.WriteAllLines(sTxtPath, lines)
+                Else
+                    For iLines = 0 To lines.Count - 1
+                        lines(iLines) = sNowPlaying
+                        File.WriteAllLines(sTxtPath, lines)
+                    Next
+                End If
             Else
                 FileOpen(1, sTxtPath, OpenMode.Append)
                 PrintLine(1, sNowPlaying)
@@ -103,6 +117,21 @@ Public Class frmMain
         Try
             sReturn = System.IO.File.ReadAllText(sTxtPath)
 
+        Catch ex As Exception
+
+        End Try
+
+        Return sReturn
+    End Function
+
+    Private Function GetTextPerLine(ByVal sTxtPath As String) As ArrayList
+
+        Dim sReturn As New ArrayList
+
+        Try
+            For Each line As String In File.ReadLines(sTxtPath)
+                sReturn.Add(line)
+            Next
         Catch ex As Exception
 
         End Try
@@ -166,19 +195,88 @@ Public Class frmMain
 
             Label3.Text = "00:00:00"
 
-            UpdateText(Application.StartupPath & "\Timer.txt", "00:00:00")
+            UpdateText(Application.StartupPath & "\Timer.txt", "00:00:00", True)
 
         End If
 
     End Sub
 
     Private Sub btnPauseMsgUpdate_Click(sender As Object, e As EventArgs) Handles btnPauseMsgUpdate.Click
-        UpdateText(Application.StartupPath & "\PauseTXTMsg.txt", txtGetPauseMessage.Text)
+        UpdateText(Application.StartupPath & "\PauseTXTMsg.txt", txtGetPauseMessage.Text, False)
 
         MsgBox("Message Updated!", vbOKOnly)
     End Sub
 
     Private Sub btnPauseMsgRefresh_Click(sender As Object, e As EventArgs) Handles btnPauseMsgRefresh.Click
         txtGetPauseMessage.Text = GetText(Application.StartupPath & "\PauseTXTMsg.txt")
+    End Sub
+
+    Private Sub btnEmpty_Click(sender As Object, e As EventArgs) Handles btnEmpty.Click
+        txtGetPauseMessage.Text = ""
+
+        UpdateText(Application.StartupPath & "\PauseTXTMsg.txt", txtGetPauseMessage.Text, False)
+
+        MsgBox("Clear Message!", vbOKOnly)
+    End Sub
+
+    Private Sub btnExpand_Click(sender As Object, e As EventArgs) Handles btnExpand.Click
+        If Me.btnExpand.Text = ">>" Then
+            Me.btnExpand.Text = "<<"
+            Me.Width = 817
+        Else
+            Me.btnExpand.Text = ">>"
+            Me.Width = 426
+        End If
+    End Sub
+
+    Private Sub chk_btnUpdate_Click(sender As Object, e As EventArgs) Handles chk_btnUpdate.Click
+        UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
+
+        MsgBox("Checklist Updated!", vbOKOnly)
+    End Sub
+
+    Private Sub chk_btnRefresh_Click(sender As Object, e As EventArgs) Handles chk_btnRefresh.Click
+        txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
+    End Sub
+
+    Private Sub chk_btnClear_Click(sender As Object, e As EventArgs) Handles chk_btnClear.Click
+        txtChecklist.Text = ""
+
+        UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
+
+        MsgBox("Clear Checklist!", vbOKOnly)
+    End Sub
+
+    Private Sub chk_btnWindow_Click(sender As Object, e As EventArgs) Handles chk_btnWindow.Click
+        myTasks.Clear()
+
+        txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
+
+        Dim arrMyTask As New ArrayList
+        arrMyTask = GetTextPerLine(Application.StartupPath & "\Checklist.txt")
+
+        For Each sTask As String In arrMyTask
+            If sTask <> "" Then
+                Dim sTaskSplit As String()
+                sTaskSplit = sTask.Split("|")
+
+                Dim clMyTask As New myTask
+
+                clMyTask.TaskStatus = False
+                If sTaskSplit(0) = "Check" Then
+                    clMyTask.TaskStatus = True
+                End If
+
+                clMyTask.TaskDesc = sTaskSplit(1)
+
+                myTasks.Add(clMyTask)
+            End If
+        Next
+
+        frmChecklist.outChkTasks = myTasks
+
+        frmChecklist.Show()
+
+
     End Sub
 End Class

@@ -36,6 +36,14 @@ Partial Class frmMain
         Me.txtGetPauseMessage = New System.Windows.Forms.TextBox()
         Me.btnPauseMsgUpdate = New System.Windows.Forms.Button()
         Me.btnPauseMsgRefresh = New System.Windows.Forms.Button()
+        Me.btnEmpty = New System.Windows.Forms.Button()
+        Me.btnExpand = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtChecklist = New System.Windows.Forms.TextBox()
+        Me.chk_btnUpdate = New System.Windows.Forms.Button()
+        Me.chk_btnClear = New System.Windows.Forms.Button()
+        Me.chk_btnRefresh = New System.Windows.Forms.Button()
+        Me.chk_btnWindow = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,11 +64,10 @@ Partial Class frmMain
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Caviar Dreams", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(7, 27)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(201, 34)
+        Me.Label2.Size = New System.Drawing.Size(338, 34)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "NOW PLAYING"
         '
@@ -132,11 +139,91 @@ Partial Class frmMain
         Me.btnPauseMsgRefresh.Text = "Refresh"
         Me.btnPauseMsgRefresh.UseVisualStyleBackColor = True
         '
+        'btnEmpty
+        '
+        Me.btnEmpty.Location = New System.Drawing.Point(323, 227)
+        Me.btnEmpty.Name = "btnEmpty"
+        Me.btnEmpty.Size = New System.Drawing.Size(75, 23)
+        Me.btnEmpty.TabIndex = 7
+        Me.btnEmpty.Text = "Reset"
+        Me.btnEmpty.UseVisualStyleBackColor = True
+        '
+        'btnExpand
+        '
+        Me.btnExpand.Location = New System.Drawing.Point(351, 9)
+        Me.btnExpand.Name = "btnExpand"
+        Me.btnExpand.Size = New System.Drawing.Size(47, 31)
+        Me.btnExpand.TabIndex = 8
+        Me.btnExpand.Text = ">>"
+        Me.btnExpand.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(426, 8)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(75, 17)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "CHECKLIST"
+        '
+        'txtChecklist
+        '
+        Me.txtChecklist.Location = New System.Drawing.Point(429, 28)
+        Me.txtChecklist.Multiline = True
+        Me.txtChecklist.Name = "txtChecklist"
+        Me.txtChecklist.Size = New System.Drawing.Size(360, 193)
+        Me.txtChecklist.TabIndex = 10
+        '
+        'chk_btnUpdate
+        '
+        Me.chk_btnUpdate.Location = New System.Drawing.Point(429, 226)
+        Me.chk_btnUpdate.Name = "chk_btnUpdate"
+        Me.chk_btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.chk_btnUpdate.TabIndex = 11
+        Me.chk_btnUpdate.Text = "Update"
+        Me.chk_btnUpdate.UseVisualStyleBackColor = True
+        '
+        'chk_btnClear
+        '
+        Me.chk_btnClear.Location = New System.Drawing.Point(589, 226)
+        Me.chk_btnClear.Name = "chk_btnClear"
+        Me.chk_btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.chk_btnClear.TabIndex = 13
+        Me.chk_btnClear.Text = "Reset"
+        Me.chk_btnClear.UseVisualStyleBackColor = True
+        '
+        'chk_btnRefresh
+        '
+        Me.chk_btnRefresh.Location = New System.Drawing.Point(509, 226)
+        Me.chk_btnRefresh.Name = "chk_btnRefresh"
+        Me.chk_btnRefresh.Size = New System.Drawing.Size(75, 23)
+        Me.chk_btnRefresh.TabIndex = 12
+        Me.chk_btnRefresh.Text = "Refresh"
+        Me.chk_btnRefresh.UseVisualStyleBackColor = True
+        '
+        'chk_btnWindow
+        '
+        Me.chk_btnWindow.Location = New System.Drawing.Point(714, 227)
+        Me.chk_btnWindow.Name = "chk_btnWindow"
+        Me.chk_btnWindow.Size = New System.Drawing.Size(75, 23)
+        Me.chk_btnWindow.TabIndex = 14
+        Me.chk_btnWindow.Text = "Open Win"
+        Me.chk_btnWindow.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 261)
+        Me.Controls.Add(Me.chk_btnWindow)
+        Me.Controls.Add(Me.chk_btnClear)
+        Me.Controls.Add(Me.chk_btnRefresh)
+        Me.Controls.Add(Me.chk_btnUpdate)
+        Me.Controls.Add(Me.txtChecklist)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.btnExpand)
+        Me.Controls.Add(Me.btnEmpty)
         Me.Controls.Add(Me.btnPauseMsgRefresh)
         Me.Controls.Add(Me.btnPauseMsgUpdate)
         Me.Controls.Add(Me.txtGetPauseMessage)
@@ -167,4 +254,12 @@ Partial Class frmMain
     Friend WithEvents txtGetPauseMessage As TextBox
     Friend WithEvents btnPauseMsgUpdate As Button
     Friend WithEvents btnPauseMsgRefresh As Button
+    Friend WithEvents btnEmpty As Button
+    Friend WithEvents btnExpand As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtChecklist As TextBox
+    Friend WithEvents chk_btnUpdate As Button
+    Friend WithEvents chk_btnClear As Button
+    Friend WithEvents chk_btnRefresh As Button
+    Friend WithEvents chk_btnWindow As Button
 End Class
