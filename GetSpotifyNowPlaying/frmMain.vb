@@ -81,7 +81,7 @@ Public Class frmMain
         iSeconds += 1
     End Sub
 
-    Private Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String, ByVal bOneLine As Boolean)
+    Public Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String, ByVal bOneLine As Boolean)
         Try
             Application.DoEvents()
 
@@ -124,7 +124,7 @@ Public Class frmMain
         Return sReturn
     End Function
 
-    Private Function GetTextPerLine(ByVal sTxtPath As String) As ArrayList
+    Public Function GetTextPerLine(ByVal sTxtPath As String) As ArrayList
 
         Dim sReturn As New ArrayList
 
@@ -229,6 +229,29 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub btnappend_Click(sender As Object, e As EventArgs) Handles btnappend.Click
+        If cmbType.Text <> "" Or txtDesc.Text <> "" Then
+            If txtChecklist.Text <> "" Then
+                txtChecklist.Text = txtChecklist.Text.TrimEnd
+                txtChecklist.Text &= vbCrLf
+            End If
+
+            If cmbType.Text = "Task (Check)" Then
+                txtChecklist.Text &= "Check"
+            End If
+
+            txtChecklist.Text &= "|" & txtDesc.Text
+
+            If cmbType.Text = "Header" Then
+                txtChecklist.Text &= "|Header"
+            Else
+                txtChecklist.Text &= "|Task"
+            End If
+        Else
+            MsgBox("Choose type and description should not be blank")
+        End If
+    End Sub
+
     Private Sub chk_btnUpdate_Click(sender As Object, e As EventArgs) Handles chk_btnUpdate.Click
         UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
 
@@ -250,11 +273,14 @@ Public Class frmMain
     Private Sub chk_btnWindow_Click(sender As Object, e As EventArgs) Handles chk_btnWindow.Click
         myTasks.Clear()
 
+        UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
+
         txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
 
         Dim arrMyTask As New ArrayList
         arrMyTask = GetTextPerLine(Application.StartupPath & "\Checklist.txt")
 
+        'To Refactor
         For Each sTask As String In arrMyTask
             If sTask <> "" Then
                 Dim sTaskSplit As String()
@@ -263,11 +289,17 @@ Public Class frmMain
                 Dim clMyTask As New myTask
 
                 clMyTask.TaskStatus = False
-                If sTaskSplit(0) = "Check" Then
-                    clMyTask.TaskStatus = True
+                If sTaskSplit(2) = "Task" Then
+                    If sTaskSplit(0) = "Check" Then
+                        clMyTask.TaskStatus = True
+                    End If
+                Else
+                    clMyTask.TaskStatus = False
                 End If
 
                 clMyTask.TaskDesc = sTaskSplit(1)
+
+                clMyTask.TaskType = sTaskSplit(2)
 
                 myTasks.Add(clMyTask)
             End If
@@ -279,4 +311,5 @@ Public Class frmMain
 
 
     End Sub
+
 End Class

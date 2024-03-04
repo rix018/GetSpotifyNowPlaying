@@ -44,6 +44,11 @@ Partial Class frmMain
         Me.chk_btnClear = New System.Windows.Forms.Button()
         Me.chk_btnRefresh = New System.Windows.Forms.Button()
         Me.chk_btnWindow = New System.Windows.Forms.Button()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
+        Me.txtDesc = New System.Windows.Forms.TextBox()
+        Me.btnappend = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -169,10 +174,10 @@ Partial Class frmMain
         '
         'txtChecklist
         '
-        Me.txtChecklist.Location = New System.Drawing.Point(429, 28)
+        Me.txtChecklist.Location = New System.Drawing.Point(429, 75)
         Me.txtChecklist.Multiline = True
         Me.txtChecklist.Name = "txtChecklist"
-        Me.txtChecklist.Size = New System.Drawing.Size(360, 193)
+        Me.txtChecklist.Size = New System.Drawing.Size(360, 146)
         Me.txtChecklist.TabIndex = 10
         '
         'chk_btnUpdate
@@ -211,11 +216,59 @@ Partial Class frmMain
         Me.chk_btnWindow.Text = "Open Win"
         Me.chk_btnWindow.UseVisualStyleBackColor = True
         '
+        'cmbType
+        '
+        Me.cmbType.FormattingEnabled = True
+        Me.cmbType.Items.AddRange(New Object() {"Header", "Task (Check)", "Task (Uncheck)"})
+        Me.cmbType.Location = New System.Drawing.Point(621, 48)
+        Me.cmbType.Name = "cmbType"
+        Me.cmbType.Size = New System.Drawing.Size(102, 21)
+        Me.cmbType.TabIndex = 15
+        '
+        'txtDesc
+        '
+        Me.txtDesc.Location = New System.Drawing.Point(429, 49)
+        Me.txtDesc.Name = "txtDesc"
+        Me.txtDesc.Size = New System.Drawing.Size(186, 20)
+        Me.txtDesc.TabIndex = 16
+        '
+        'btnappend
+        '
+        Me.btnappend.Location = New System.Drawing.Point(729, 46)
+        Me.btnappend.Name = "btnappend"
+        Me.btnappend.Size = New System.Drawing.Size(60, 23)
+        Me.btnappend.TabIndex = 17
+        Me.btnappend.Text = "Append"
+        Me.btnappend.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(426, 33)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(60, 13)
+        Me.Label5.TabIndex = 18
+        Me.Label5.Text = "Description"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(618, 32)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(31, 13)
+        Me.Label6.TabIndex = 19
+        Me.Label6.Text = "Type"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 261)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.btnappend)
+        Me.Controls.Add(Me.txtDesc)
+        Me.Controls.Add(Me.cmbType)
         Me.Controls.Add(Me.chk_btnWindow)
         Me.Controls.Add(Me.chk_btnClear)
         Me.Controls.Add(Me.chk_btnRefresh)
@@ -262,4 +315,9 @@ Partial Class frmMain
     Friend WithEvents chk_btnClear As Button
     Friend WithEvents chk_btnRefresh As Button
     Friend WithEvents chk_btnWindow As Button
+    Friend WithEvents cmbType As ComboBox
+    Friend WithEvents txtDesc As TextBox
+    Friend WithEvents btnappend As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
 End Class
