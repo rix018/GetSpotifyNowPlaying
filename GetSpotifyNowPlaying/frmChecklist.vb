@@ -90,8 +90,6 @@
 
             UpdateText(Application.StartupPath & "\Checklist.txt", frmMain.txtChecklist.Text, False)
 
-            outChkTasks.Clear()
-
             Dim arrMyTask As New ArrayList
             myLoadTask(arrMyTask, outChkTasks)
 

@@ -220,8 +220,6 @@ Public Class frmMain
     End Sub
 
     Private Sub chk_btnWindow_Click(sender As Object, e As EventArgs) Handles chk_btnWindow.Click
-        myTasks.Clear()
-
         UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
         txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
 
@@ -238,7 +236,6 @@ Public Class frmMain
 
     Private Sub myRefreshChecklistform()
         If frmChecklist.Visible Then
-            myTasks.Clear()
 
             Dim ogFormLoc As Point = frmChecklist.Location
 

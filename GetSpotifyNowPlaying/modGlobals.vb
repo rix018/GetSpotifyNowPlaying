@@ -4,6 +4,8 @@ Module modGlobals
 
     Public Sub myLoadTask(ByVal thisArr As ArrayList, ByRef thisUpdatedArr As List(Of myTask))
 
+        thisUpdatedArr.Clear()
+
         thisArr = GetTextPerLine(Application.StartupPath & "\Checklist.txt")
 
         For Each sTask As String In thisArr
