@@ -88,39 +88,12 @@
                 currentIDX += 1
             Next
 
-            frmMain.UpdateText(Application.StartupPath & "\Checklist.txt", frmMain.txtChecklist.Text, False)
+            UpdateText(Application.StartupPath & "\Checklist.txt", frmMain.txtChecklist.Text, False)
 
             outChkTasks.Clear()
 
             Dim arrMyTask As New ArrayList
-            arrMyTask = frmMain.GetTextPerLine(Application.StartupPath & "\Checklist.txt")
-
-            Dim newUpdated As New List(Of myTask)
-
-            'To Refactor
-            For Each sTask As String In arrMyTask
-                If sTask <> "" Then
-                    Dim sTaskSplit As String()
-                    sTaskSplit = sTask.Split("|")
-
-                    Dim clMyTask As New myTask
-
-                    clMyTask.TaskStatus = False
-                    If sTaskSplit(2) = "Task" Then
-                        If sTaskSplit(0) = "Check" Then
-                            clMyTask.TaskStatus = True
-                        End If
-                    Else
-                        clMyTask.TaskStatus = False
-                    End If
-
-                    clMyTask.TaskDesc = sTaskSplit(1)
-
-                    clMyTask.TaskType = sTaskSplit(2)
-
-                    outChkTasks.Add(clMyTask)
-                End If
-            Next
+            myLoadTask(arrMyTask, outChkTasks)
 
         End If
     End Sub

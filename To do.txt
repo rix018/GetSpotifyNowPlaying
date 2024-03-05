@@ -1,0 +1,5 @@
+
+-Functionality on Customizing Main Header (Size, Visibility and Font)
+-Functionality on Checklist (Font and Size)
+
+Done Updates

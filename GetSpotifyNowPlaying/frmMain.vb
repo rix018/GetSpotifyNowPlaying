@@ -81,64 +81,6 @@ Public Class frmMain
         iSeconds += 1
     End Sub
 
-    Public Sub UpdateText(ByVal sTxtPath As String, ByVal sNowPlaying As String, ByVal bOneLine As Boolean)
-        Try
-            Application.DoEvents()
-
-            File.WriteAllText(sTxtPath, "")
-
-            Dim lines() As String = System.IO.File.ReadAllLines(sTxtPath)
-
-            If lines.Count <> 0 Then
-                If bOneLine Then
-                    lines(0) = sNowPlaying
-                    File.WriteAllLines(sTxtPath, lines)
-                Else
-                    For iLines = 0 To lines.Count - 1
-                        lines(iLines) = sNowPlaying
-                        File.WriteAllLines(sTxtPath, lines)
-                    Next
-                End If
-            Else
-                FileOpen(1, sTxtPath, OpenMode.Append)
-                PrintLine(1, sNowPlaying)
-                FileClose(1)
-            End If
-
-            System.Threading.Thread.Sleep(1000)
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Function GetText(ByVal sTxtPath As String) As String
-        Dim sReturn As String = ""
-
-        Try
-            sReturn = System.IO.File.ReadAllText(sTxtPath)
-
-        Catch ex As Exception
-
-        End Try
-
-        Return sReturn
-    End Function
-
-    Public Function GetTextPerLine(ByVal sTxtPath As String) As ArrayList
-
-        Dim sReturn As New ArrayList
-
-        Try
-            For Each line As String In File.ReadLines(sTxtPath)
-                sReturn.Add(line)
-            Next
-        Catch ex As Exception
-
-        End Try
-
-        Return sReturn
-    End Function
-
     Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         thisThread.Dispose()
 
@@ -247,6 +189,9 @@ Public Class frmMain
             Else
                 txtChecklist.Text &= "|Task"
             End If
+
+            UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
+            myRefreshChecklistform()
         Else
             MsgBox("Choose type and description should not be blank")
         End If
@@ -254,6 +199,8 @@ Public Class frmMain
 
     Private Sub chk_btnUpdate_Click(sender As Object, e As EventArgs) Handles chk_btnUpdate.Click
         UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
+
+        myRefreshChecklistform()
 
         MsgBox("Checklist Updated!", vbOKOnly)
     End Sub
@@ -267,6 +214,8 @@ Public Class frmMain
 
         UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
 
+        myRefreshChecklistform()
+
         MsgBox("Clear Checklist!", vbOKOnly)
     End Sub
 
@@ -274,42 +223,32 @@ Public Class frmMain
         myTasks.Clear()
 
         UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
-
         txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
 
-        Dim arrMyTask As New ArrayList
-        arrMyTask = GetTextPerLine(Application.StartupPath & "\Checklist.txt")
-
-        'To Refactor
-        For Each sTask As String In arrMyTask
-            If sTask <> "" Then
-                Dim sTaskSplit As String()
-                sTaskSplit = sTask.Split("|")
-
-                Dim clMyTask As New myTask
-
-                clMyTask.TaskStatus = False
-                If sTaskSplit(2) = "Task" Then
-                    If sTaskSplit(0) = "Check" Then
-                        clMyTask.TaskStatus = True
-                    End If
-                Else
-                    clMyTask.TaskStatus = False
-                End If
-
-                clMyTask.TaskDesc = sTaskSplit(1)
-
-                clMyTask.TaskType = sTaskSplit(2)
-
-                myTasks.Add(clMyTask)
-            End If
-        Next
+        myReloadChecklist()
 
         frmChecklist.outChkTasks = myTasks
-
         frmChecklist.Show()
+    End Sub
 
+    Private Sub myReloadChecklist()
+        Dim arrMyTask As New ArrayList
+        myLoadTask(arrMyTask, myTasks)
+    End Sub
 
+    Private Sub myRefreshChecklistform()
+        If frmChecklist.Visible Then
+            myTasks.Clear()
+
+            Dim ogFormLoc As Point = frmChecklist.Location
+
+            frmChecklist.Dispose()
+            myReloadChecklist()
+
+            frmChecklist.outChkTasks = myTasks
+            frmChecklist.Show()
+            frmChecklist.Location = ogFormLoc
+        End If
     End Sub
 
 End Class
