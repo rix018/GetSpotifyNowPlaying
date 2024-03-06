@@ -25,6 +25,16 @@
                 thischeck.Tag = checkIDX.ToString
 
                 Me.Controls.Add(thischeck)
+            ElseIf thistask.TaskType = "Note" Then
+                Dim thisminilabel As New Label()
+                thisminilabel.Text = thistask.TaskDesc
+                thisminilabel.Location = New Point(chkLocX + 16, chkLocY - 5)
+                thisminilabel.Font = New Font("Nirmala UI", 8, FontStyle.Bold)
+                thisminilabel.ForeColor = Color.White
+                thisminilabel.AutoSize = True
+                thisminilabel.Tag = checkIDX.ToString
+
+                Me.Controls.Add(thisminilabel)
             Else
                 Dim thislabel As New Label()
                 thislabel.Text = thistask.TaskDesc
@@ -37,7 +47,12 @@
                 Me.Controls.Add(thislabel)
             End If
 
-            chkLocY += 27
+            If thistask.TaskType = "Note" Then
+                chkLocY += 15
+            Else
+                chkLocY += 27
+            End If
+
             checkIDX += 1
 
         Next thistask
@@ -66,24 +81,21 @@
                     frmMain.txtChecklist.Text &= vbCrLf
                 End If
 
+                Dim sChecked As String = ""
+
                 If thisTask.TaskType = "Task" Then
                     If IDXup = currentIDX Then
                         If sender.checked Then
-                            frmMain.txtChecklist.Text &= "Check"
-                        Else
-                            frmMain.txtChecklist.Text &= ""
+                            sChecked = "Checked"
                         End If
                     Else
                         If thisTask.TaskStatus Then
-                            frmMain.txtChecklist.Text &= "Check"
-                        Else
-                            frmMain.txtChecklist.Text &= ""
+                            sChecked = "Checked"
                         End If
                     End If
                 End If
 
-                frmMain.txtChecklist.Text &= "|" & thisTask.TaskDesc
-                frmMain.txtChecklist.Text &= "|" & thisTask.TaskType
+                frmMain.txtChecklist.Text &= sChecked & "|" & thisTask.TaskDesc & "|" & thisTask.TaskType
 
                 currentIDX += 1
             Next
@@ -92,7 +104,6 @@
 
             Dim arrMyTask As New ArrayList
             myLoadTask(arrMyTask, outChkTasks)
-
         End If
     End Sub
 End Class

@@ -219,7 +219,7 @@ Partial Class frmMain
         'cmbType
         '
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"Header", "Task (Check)", "Task (Uncheck)"})
+        Me.cmbType.Items.AddRange(New Object() {"Header", "Task (Check)", "Task (Uncheck)", "Note"})
         Me.cmbType.Location = New System.Drawing.Point(621, 48)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(102, 21)

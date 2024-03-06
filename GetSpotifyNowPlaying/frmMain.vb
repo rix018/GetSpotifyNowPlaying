@@ -173,21 +173,27 @@ Public Class frmMain
 
     Private Sub btnappend_Click(sender As Object, e As EventArgs) Handles btnappend.Click
         If cmbType.Text <> "" Or txtDesc.Text <> "" Then
+            Dim thisTask As New myTask
+
+            If cmbType.Text = "Task (Check)" Or cmbType.Text = "Task (Uncheck)" Then
+                If cmbType.Text = "Task (Check)" Then
+                    thisTask = createMyTask(True, txtDesc.Text, "Task")
+                Else
+                    thisTask = createMyTask(False, txtDesc.Text, "Task")
+                End If
+            Else
+                thisTask = createMyTask(False, txtDesc.Text, cmbType.Text)
+            End If
+
             If txtChecklist.Text <> "" Then
                 txtChecklist.Text = txtChecklist.Text.TrimEnd
                 txtChecklist.Text &= vbCrLf
             End If
 
-            If cmbType.Text = "Task (Check)" Then
-                txtChecklist.Text &= "Check"
-            End If
-
-            txtChecklist.Text &= "|" & txtDesc.Text
-
-            If cmbType.Text = "Header" Then
-                txtChecklist.Text &= "|Header"
+            If thisTask.TaskStatus Then
+                txtChecklist.Text &= "Check" & "|" & thisTask.TaskDesc & "|" & thisTask.TaskType
             Else
-                txtChecklist.Text &= "|Task"
+                txtChecklist.Text &= "|" & thisTask.TaskDesc & "|" & thisTask.TaskType
             End If
 
             UpdateText(Application.StartupPath & "\Checklist.txt", txtChecklist.Text, False)
@@ -207,6 +213,8 @@ Public Class frmMain
 
     Private Sub chk_btnRefresh_Click(sender As Object, e As EventArgs) Handles chk_btnRefresh.Click
         txtChecklist.Text = GetText(Application.StartupPath & "\Checklist.txt")
+
+        myRefreshChecklistform()
     End Sub
 
     Private Sub chk_btnClear_Click(sender As Object, e As EventArgs) Handles chk_btnClear.Click

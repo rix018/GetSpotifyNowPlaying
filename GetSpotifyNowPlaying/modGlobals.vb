@@ -14,19 +14,15 @@ Module modGlobals
                 sTaskSplit = sTask.Split("|")
 
                 Dim clMyTask As New myTask
-
-                clMyTask.TaskStatus = False
                 If sTaskSplit(2) = "Task" Then
                     If sTaskSplit(0) = "Check" Then
-                        clMyTask.TaskStatus = True
+                        clMyTask = createMyTask(True, sTaskSplit(1), sTaskSplit(2))
+                    Else
+                        clMyTask = createMyTask(False, sTaskSplit(1), sTaskSplit(2))
                     End If
                 Else
-                    clMyTask.TaskStatus = False
+                    clMyTask = createMyTask(False, sTaskSplit(1), sTaskSplit(2))
                 End If
-
-                clMyTask.TaskDesc = sTaskSplit(1)
-
-                clMyTask.TaskType = sTaskSplit(2)
 
                 thisUpdatedArr.Add(clMyTask)
             End If
@@ -77,6 +73,20 @@ Module modGlobals
 
         End Try
     End Sub
+
+    Public Function createMyTask(ByVal bState As Boolean, ByVal sDesc As String, ByVal sType As String) As myTask
+        Dim oReturn As New myTask
+
+        Try
+            oReturn.TaskStatus = bState
+            oReturn.TaskDesc = sDesc
+            oReturn.TaskType = sType
+        Catch ex As Exception
+
+        End Try
+
+        Return oReturn
+    End Function
 
     Public Function GetText(ByVal sTxtPath As String) As String
         Dim sReturn As String = ""
