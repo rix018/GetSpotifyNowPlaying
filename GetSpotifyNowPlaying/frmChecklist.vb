@@ -86,11 +86,11 @@
                 If thisTask.TaskType = "Task" Then
                     If IDXup = currentIDX Then
                         If sender.checked Then
-                            sChecked = "Checked"
+                            sChecked = "Check"
                         End If
                     Else
                         If thisTask.TaskStatus Then
-                            sChecked = "Checked"
+                            sChecked = "Check"
                         End If
                     End If
                 End If
