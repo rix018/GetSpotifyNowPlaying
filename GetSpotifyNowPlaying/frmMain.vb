@@ -51,7 +51,7 @@ Public Class frmMain
                 Dim thisWindowTitle As String = thisprocess.MainWindowTitle
                 If thisWindowTitle <> "" AndAlso thisWindowTitle <> "Spotify" AndAlso thisWindowTitle <> "Spotify Premium" Then
                     Label2.Text = thisprocess.MainWindowTitle
-                    UpdateText(Application.StartupPath & "\NowPlaying.txt", thisWindowTitle, True)
+                    UpdateText(Application.StartupPath & "\NowPlaying.txt", thisWindowTitle & "  ", True)
                 End If
             End If
         Next
