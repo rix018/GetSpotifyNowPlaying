@@ -25,6 +25,8 @@
                 thischeck.Tag = checkIDX.ToString
 
                 Me.Controls.Add(thischeck)
+
+                meFormAdjustW(chkLocX + thischeck.Width, chkLocX)
             ElseIf thistask.TaskType = "Note" Then
                 Dim thisminilabel As New Label()
                 thisminilabel.Text = thistask.TaskDesc
@@ -35,6 +37,8 @@
                 thisminilabel.Tag = checkIDX.ToString
 
                 Me.Controls.Add(thisminilabel)
+
+                meFormAdjustW(chkLocX + 16 + thisminilabel.Width, chkLocX + 16)
             Else
                 Dim thislabel As New Label()
                 thislabel.Text = thistask.TaskDesc
@@ -45,6 +49,8 @@
                 thislabel.Tag = checkIDX.ToString
 
                 Me.Controls.Add(thislabel)
+
+                meFormAdjustW(chkLocX - 5 + thislabel.Width, chkLocX - 5)
             End If
 
             If thistask.TaskType = "Note" Then
@@ -58,6 +64,12 @@
         Next thistask
 
         bUppate = True
+    End Sub
+
+    Private Sub meFormAdjustW(ByVal thislabelwidth As Integer, ByVal iAddWidth As Integer)
+        If thislabelwidth > Me.Width Then
+            Me.Width = thislabelwidth + (iAddWidth * 2)
+        End If
     End Sub
 
     Private Sub ChkStrike(sender As System.Object, e As System.EventArgs)
