@@ -59,6 +59,8 @@
                 chkLocY += 27
             End If
 
+            meFormAdjustL(chkLocY, chkLocY)
+
             checkIDX += 1
 
         Next thistask
@@ -69,6 +71,12 @@
     Private Sub meFormAdjustW(ByVal thislabelwidth As Integer, ByVal iAddWidth As Integer)
         If thislabelwidth > Me.Width Then
             Me.Width = thislabelwidth + (iAddWidth * 2)
+        End If
+    End Sub
+
+    Private Sub meFormAdjustL(ByVal thislabelLocY As Integer, ByVal iAddLength As Integer)
+        If thislabelLocY + 41 > Me.Height Then
+            Me.Height = iAddLength + 41
         End If
     End Sub
 
